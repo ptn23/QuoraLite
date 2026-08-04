@@ -1,12 +1,36 @@
-import {useState} from 'react'
-import { useParams } from 'react-router-dom'
+import {useState, useEffect} from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import './EditPost.css'
 import { supabase } from '../client'
-
+import Loading from './Loading'
 const EditPost = () => {
 
     const {id} = useParams()
-    const [post, setPost] = useState({id: null, title: "", content: "", image_url: ""})
+    const [post, setPost] = useState({
+        title: '',
+        content: '',
+        image_url: ''
+    });
+    const [loading, setLoading] = useState(true);
+
+    useEffect(()=> {
+        const getPost = async ()=>{
+            setLoading(true);
+            const {data: fetchedPost, error} = await supabase.from('mini-quora').select().eq("id", id).single();
+            if (error){
+                console.error("Error fetching detail:", error);
+            }
+            else{
+                setPost({
+                    title: fetchedPost.title,
+                    content: fetchedPost.content,
+                    image_url: fetchedPost.image_url
+                });
+            }
+            setLoading(false);
+        }
+        getPost();
+    }, [id]);
 
     const handleChange = (event) => {
         const {name, value} = event.target
@@ -37,6 +61,8 @@ const EditPost = () => {
         await supabase.from('mini-quora').delete().eq('id', id);
         window.location = "/";
     }
+
+    if (loading) return <Loading />;
 
     return (
         <div>
