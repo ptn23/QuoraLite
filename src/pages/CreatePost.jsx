@@ -44,7 +44,7 @@ const CreatePost = () => {
                 <br/>
 
                 <label htmlFor="content">Content</label><br />
-                <textarea rows="5" cols="50" id="description" name="description" onChange={handleChange} >
+                <textarea rows="5" cols="50" id="content" name="content" onChange={handleChange} >
                 </textarea>
                 <br/>
 

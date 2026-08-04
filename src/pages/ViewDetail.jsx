@@ -48,6 +48,12 @@ const ViewDetail = () => {
         }
     }
 
+    const deletePost = async(event)=> {
+        event.preventDefault();
+        await supabase.from('mini-quora').delete().eq('id', id);
+        window.location = "/";
+    }
+
     if (loading) return <Loading />;
     if (!data) return <h2>Post not found!</h2>;
 
@@ -72,6 +78,12 @@ const ViewDetail = () => {
                 👍 {data.upvotes}
             </button>
             <br />
+
+            <Link to={'/edit/'+ id}>
+                <button className="moreButton" alt="edit button" >Edit</button>
+            </Link>
+            <button className="deleteButton" onClick={deletePost}>Delete</button>
+
 
             <div className="comments-section">
                 <h3>Comments</h3>

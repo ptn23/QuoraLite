@@ -56,3 +56,20 @@
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   word-wrap: break-word;
 }
+
+.deleteButton {
+    width: 100%;
+    height: 20px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 10px;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #870404;
+    color:white;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
