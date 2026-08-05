@@ -54,10 +54,10 @@ The following **optional** features are implemented:
   - On the post page of the new post, the referenced post is displayed and linked, creating a thread
 - [ ] Users can customize the interface
   - e.g., selecting the color scheme or showing the content and image of each post on the home feed
-- [ ] Users can add more characterics to their posts
+- [x] Users can add more characterics to their posts
   - Users can share and view web videos
-  - Users can set flags such as "Question" or "Opinion" while creating a post
-  - Users can filter posts by flags on the home feed
+  - [x] Users can set flags such as "Question" or "Opinion" while creating a post
+  - [x] Users can filter posts by flags on the home feed
   - Users can upload images directly from their local machine as an image file
 - [x] Web app displays a loading animation whenever data is being fetched
 
@@ -68,15 +68,10 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
+<img width="400" height="174" alt="Screen Recording 2026-08-04 222744" src="https://github.com/user-attachments/assets/79f5978f-73d7-4271-ae80-b7bde0b45120" />
 
-<img width="400" height="172" alt="Screen Recording 2026-08-04 021547" src="https://github.com/user-attachments/assets/885ca525-ef88-4f3b-9f34-6108513b9ac2" />
 
-<!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
 
 ## Notes
 
