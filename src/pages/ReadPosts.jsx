@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Card from '../components/Card'
 import { supabase } from '../client'
 import Loading from './Loading'
-const ReadPosts = ({sortBy, search}) => {
+const ReadPosts = ({sortBy, search, flags}) => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -15,7 +15,12 @@ const ReadPosts = ({sortBy, search}) => {
         fetchPost()
     }, [])
 
-    const filteredPosts = posts ? [...posts].filter((post) => {
+    const filteredFlag = posts ? [...posts].filter((post) => {
+        if (!flags) return true;
+        return post.flags.toLowerCase().includes(flags.toLowerCase());
+    }) : [];
+
+    const filteredPosts = posts ? [...filteredFlag].filter((post) => {
         if (!search) return true;
         return post.title.toLowerCase().includes(search.toLowerCase());
     }) : [];
@@ -41,6 +46,7 @@ const ReadPosts = ({sortBy, search}) => {
                         title={post.title}
                         upvotes={post.upvotes}
                         time={post.created_at}
+                        flags={post.flags}
                     />
                 ) : <h2>{'No Questions Yet!'}</h2>
             }

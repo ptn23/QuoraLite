@@ -5,8 +5,8 @@ const CreatePost = () => {
     const [post, setPost] = useState({
         'title': '',
         'content': '',
-        'image_url': ''
-        
+        'image_url': '',
+        'flags': 'unidentified'
     })
 
     const [select, setSelect] = useState("");
@@ -31,7 +31,8 @@ const CreatePost = () => {
         await supabase.from('mini-quora').insert({
             title: post.title,
             content: post.content,
-            image_url: post.image_url
+            image_url: post.image_url,
+            flags: post.flags
         }).select();
         window.location = "/";
     }
@@ -40,11 +41,11 @@ const CreatePost = () => {
         <div>
             <form>
                 <label htmlFor="title">Title</label> <br />
-                <input type="text" id="title" name="title" onChange={handleChange} required/><br />
+                <input type="text" id="title" name="title" value={post.title}onChange={handleChange} required/><br />
                 <br/>
 
                 <label htmlFor="content">Content</label><br />
-                <textarea rows="5" cols="50" id="content" name="content" onChange={handleChange} >
+                <textarea rows="5" cols="50" id="content" name="content" value={post.content}onChange={handleChange} >
                 </textarea>
                 <br/>
 
@@ -59,7 +60,21 @@ const CreatePost = () => {
                 />
                 <br/>
 
+                <label htmlFor="flags"> Pick a flag for the question
+                    <select
+                    id="flags"
+                    name="flags"
+                    value={post.flags}
+                    onChange={handleChange}
+                    className="flags"
+                    >
+                    <option value='unidentified'>Unidentified</option>
+                    <option value='question'> Question </option>
+                    <option value='discussion'> Discussion </option>
+                    </select>
+                </label>
 
+                <br/>
                 <input type="submit" value="Submit" onClick={createPost} />
             </form>
         </div>

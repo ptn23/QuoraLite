@@ -10,14 +10,15 @@ function App() {
 
   const [sortBy, setSortBy] = useState('created_at')
   const [search, setSearch] = useState('')
-  const [theme, setTheme] = useState('light')
+  const [flag, setFlag] = useState('')  
 
   let element = useRoutes([
     {
       path: "/",
       element:<ReadPosts 
       sortBy={sortBy}
-      search={search} />
+      search={search} 
+      flags={flag}/>
     },
     {
       path:"/edit/:id",
@@ -48,12 +49,27 @@ function App() {
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             className='sort-select'>
+              <option value=''></option>
               <option value='created_at'>Created At</option>
               <option value='upvotes'> Upvotes</option>
             </select>
           </label>
         </div>
 
+        <div>
+          <label>
+            Filter by flags:
+            <select
+            value={flag}
+            onChange={(e) => setFlag(e.target.value)}
+            className='sort-flag'>
+              <option value=''></option>
+              <option value='question'>Question</option>
+              <option value='discussion'>Discussion</option>
+              <option value='unidentified'>Unidentified</option>
+            </select>
+          </label>
+        </div>
         <div>
           <input
           type="text"
