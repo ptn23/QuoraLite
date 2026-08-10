@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { supabase } from '../client';
 import Loading from './Loading';
+import { Ratio } from 'react-bootstrap';
+// import YoutubeEmbed from '../components/YoutubeEmbed';
 
 const ViewDetail = () => {
     const { id } = useParams();
@@ -47,6 +49,13 @@ const ViewDetail = () => {
             setData((prev) => ({ ...prev, comments: data.comments }));
         }
     }
+    
+    const getEmbedUrl = (url) => {
+        if (!url) return null;
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length === 11) ? `https://www.youtube.com/embed/${match[2]}`: url;
+};
 
     const deletePost = async(event)=> {
         event.preventDefault();
@@ -71,6 +80,15 @@ const ViewDetail = () => {
                     />
                 </div>
             )}
+
+            <Ratio aspectRatio="16x9">
+                <iframe
+                    src={getEmbedUrl(data.video_link)}
+                    title="YouTube video player"
+                    allowFullScreen
+                    style={{ width: '100%', height: '100%', border: 'none', borderRadius: '8px' }}
+                  />
+            </Ratio>
 
             <p>Created at: {new Date(data.created_at).toLocaleString()}</p>
             

@@ -6,7 +6,8 @@ const CreatePost = () => {
         'title': '',
         'content': '',
         'image_url': '',
-        'flags': 'unidentified'
+        'flags': 'unidentified',
+        'video_link': ''
     })
 
     const [select, setSelect] = useState("");
@@ -32,7 +33,8 @@ const CreatePost = () => {
             title: post.title,
             content: post.content,
             image_url: post.image_url,
-            flags: post.flags
+            flags: post.flags,
+            video_link: post.video_link
         }).select();
         window.location = "/";
     }
@@ -73,6 +75,18 @@ const CreatePost = () => {
                     <option value='discussion'> Discussion </option>
                     </select>
                 </label>
+                <br/>
+                <label htmlFor="video_link">Video Link</label><br />
+                <input 
+                type="url" 
+                id="video_link" 
+                name="video_link" 
+                placeholder="https://example.com"
+                value={post.video_link} 
+                onChange={handleChange} 
+                />
+                <br/>
+                
 
                 <br/>
                 <input type="submit" value="Submit" onClick={createPost} />
