@@ -55,7 +55,7 @@ The following **optional** features are implemented:
 - [ ] Users can customize the interface
   - e.g., selecting the color scheme or showing the content and image of each post on the home feed
 - [x] Users can add more characterics to their posts
-  - Users can share and view web videos
+  - [x] Users can share and view web videos
   - [x] Users can set flags such as "Question" or "Opinion" while creating a post
   - [x] Users can filter posts by flags on the home feed
   - Users can upload images directly from their local machine as an image file
