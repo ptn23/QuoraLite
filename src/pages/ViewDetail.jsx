@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom';
 import { supabase } from '../client';
 import Loading from './Loading';
 import { Ratio } from 'react-bootstrap';
-// import YoutubeEmbed from '../components/YoutubeEmbed';
 
 const ViewDetail = () => {
     const { id } = useParams();

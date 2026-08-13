@@ -1,3 +1,18 @@
+.App{
+  --bg-color: rgba(0, 0, 0, 0.962);
+  --text-color: #ffffff;
+  --btn-bg: #1a1a1a;
+  --btn-text: #ffffff;
+  --btn-hover-border: #646cff;
+}
+.App[data-theme='Light']{
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --btn-bg: #e2e8f0;
+  --btn-text: #0f172a;
+  --btn-hover-border: #2563eb;
+}
+
 .App {
   font-family:Avenir, "Century Gothic", sans-serif;
   font-weight:100; 
@@ -16,7 +31,7 @@
 
 .header{
   width: 100%;
-  color:white;
+  color:var(--text-color);
   text-align: center;
 }
 
@@ -39,10 +54,10 @@ button {
   font-size: 15px;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
-  color:white;
+  background-color: var(--btn-bg);
+  color: var(--btn-text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.3s ease;;
 }
 button:hover {
   border-color: #646cff;

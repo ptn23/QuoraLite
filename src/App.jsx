@@ -11,6 +11,7 @@ function App() {
   const [sortBy, setSortBy] = useState('created_at')
   const [search, setSearch] = useState('')
   const [flag, setFlag] = useState('')  
+  const [mode, setMode] = useState('Dark')
 
   let element = useRoutes([
     {
@@ -36,7 +37,7 @@ function App() {
 
   return (
     <>
-      <div className="App">
+      <div className="App" data-theme={mode}>
       <div className="header">
 
 
@@ -70,6 +71,7 @@ function App() {
             </select>
           </label>
         </div>
+
         <div>
           <input
           type="text"
@@ -78,6 +80,19 @@ function App() {
           onChange={(e) => setSearch(e.target.value)}
           className="searchInput"
           />
+        </div>
+
+        <div>
+          <label>
+            Choose a mode
+            <select
+            value={mode}
+            onChange={(e) => setMode(e.target.value)}
+            className='theme-select'>
+              <option value='Dark'> Dark </option>
+              <option value='Light'> Light </option>
+            </select>
+          </label>
         </div>
 
         <Link to="/"><button className="headerBtn"> Home  </button></Link>
