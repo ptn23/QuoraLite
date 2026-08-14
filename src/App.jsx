@@ -41,20 +41,25 @@ function App() {
       <div className="header">
 
 
-        <h1>All Your Questions</h1>
+        <h1>QuoraLite</h1>
 
-        <div>
-          <label htmlFor='sortBy'>
-            Sort by:
-            <select
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className='sort-select'>
-              <option value=''></option>
-              <option value='created_at'>Created At</option>
-              <option value='upvotes'> Upvotes</option>
-            </select>
-          </label>
+        <div className="sort-container">
+          <span className="sort-label">Sort by:</span>
+          <button
+          type="button"
+          className={`sort-btn ${sortBy === 'created_at' ? 'active' : ''}`}
+          onClick={() => setSortBy('created_at')}
+          >
+          Created At
+          </button>
+
+          <button
+          type="button"
+          className={`sort-btn ${sortBy === 'upvotes' ? 'active' : ''}`}
+          onClick={() => setSortBy('upvotes')}
+          >
+          Upvotes
+          </button>
         </div>
 
         <div>
