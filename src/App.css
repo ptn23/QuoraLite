@@ -1,10 +1,10 @@
-.App{
+/* .App{
   --bg-color: rgba(0, 0, 0, 0.962);
   --text-color: #ffffff;
   --btn-bg: #1a1a1a;
   --btn-text: #ffffff;
   --btn-hover-border: #646cff;
-}
+} */
 .App[data-theme='Light']{
   --bg-color: #f8fafc;
   --text-color: #0f172a;
@@ -13,7 +13,7 @@
   --btn-hover-border: #2563eb;
 }
 
-.App {
+.App[data-theme='Dark'] {
   font-family:Avenir, "Century Gothic", sans-serif;
   font-weight:100; 
   font-style:normal;
@@ -27,6 +27,11 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  --bg-color: rgba(0, 0, 0, 0.962);
+  --text-color: #ffffff;
+  --btn-bg: #1a1a1a;
+  --btn-text: #ffffff;
+  --btn-hover-border: #646cff;
 }
 
 .header{
