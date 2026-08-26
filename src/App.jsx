@@ -6,12 +6,14 @@ import EditPost from './pages/EditPost';
 import ReadPosts from './pages/ReadPosts';
 import ViewDetail from './pages/ViewDetail';
 import './App.css'
+import Login from './pages/Login';
 function App() {
 
   const [sortBy, setSortBy] = useState('created_at')
   const [search, setSearch] = useState('')
   const [flag, setFlag] = useState('')  
   const [mode, setMode] = useState('Dark')
+  const [token, setToken] = useState()
 
   let element = useRoutes([
     {
@@ -34,6 +36,10 @@ function App() {
       element: <ViewDetail/>
     }
   ]);
+
+  if (!token){
+    return <Login setToken={setToken}/>
+  }
 
   return (
     <>
