@@ -7,14 +7,21 @@ import ReadPosts from './pages/ReadPosts';
 import ViewDetail from './pages/ViewDetail';
 import './App.css'
 import Login from './pages/Login';
+import SocialLogin from "./components/SocialLogin";
+import InputField from "./components/InputField";
+
 function App() {
 
   const [sortBy, setSortBy] = useState('created_at')
   const [search, setSearch] = useState('')
   const [flag, setFlag] = useState('')  
   const [mode, setMode] = useState('Dark')
-  const [token, setToken] = useState()
-
+  //const [token, setToken] = useState()
+  const [login, setLogin] = useState(false)
+  const handleLogin = (e) =>{
+    e.preventDefault();
+    setLogin(true);
+  }
   let element = useRoutes([
     {
       path: "/",
@@ -37,16 +44,33 @@ function App() {
     }
   ]);
 
-  if (!token){
-    return <Login setToken={setToken}/>
+  // if (!token){
+  //   return <Login setToken={setToken}/>
+  // }
+
+  if (!login){
+    return (
+    <div className="login-container">
+      <h2 className="form-title">Log in with</h2>
+      <SocialLogin />
+      <p className="separator"><span>or</span></p>
+      <form action="#" className="login-form" onSubmit={handleLogin}>
+        <InputField type="email" placeholder="Email address" icon="mail" />
+        <InputField type="password" placeholder="Password" icon="lock" />
+        <a href="#" className="forgot-password-link">Forgot password?</a>
+        <button type="submit" className="login-button">Log In</button>
+      </form>
+      <p className="signup-prompt">
+        Dont have an account? <a href="#" className="signup-link">Sign up</a>
+      </p>
+    </div>
+    )
   }
 
   return (
     <>
       <div className="App" data-theme={mode}>
       <div className="header">
-
-
         <h1>QuoraLite</h1>
 
         <div className="sort-container">
