@@ -9,6 +9,7 @@ import './App.css'
 import Login from './pages/Login';
 import SocialLogin from "./components/SocialLogin";
 import InputField from "./components/InputField";
+import SignUp from './pages/SignUp';
 
 function App() {
 
@@ -18,10 +19,12 @@ function App() {
   const [mode, setMode] = useState('Dark')
   //const [token, setToken] = useState()
   const [login, setLogin] = useState(false)
+
   const handleLogin = (e) =>{
     e.preventDefault();
     setLogin(true);
   }
+  
   let element = useRoutes([
     {
       path: "/",
@@ -41,12 +44,8 @@ function App() {
     {
       path:"/detail/:id",
       element: <ViewDetail/>
-    }
+    },
   ]);
-
-  // if (!token){
-  //   return <Login setToken={setToken}/>
-  // }
 
   if (!login){
     return (
@@ -61,7 +60,8 @@ function App() {
         <button type="submit" className="login-button">Log In</button>
       </form>
       <p className="signup-prompt">
-        Dont have an account? <a href="#" className="signup-link">Sign up</a>
+        Dont have an account? 
+        {/* <Link to="/signup" className="signup-link">Sign up</Link> */}
       </p>
     </div>
     )
