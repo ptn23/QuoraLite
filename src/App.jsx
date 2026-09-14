@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react';
 import { useRoutes, Link } from 'react-router-dom'
 import CreatePost from './pages/CreatePost';
@@ -7,8 +7,6 @@ import ReadPosts from './pages/ReadPosts';
 import ViewDetail from './pages/ViewDetail';
 import './App.css'
 import Login from './pages/Login';
-import SocialLogin from "./components/SocialLogin";
-import InputField from "./components/InputField";
 import SignUp from './pages/SignUp';
 
 function App() {
@@ -17,59 +15,62 @@ function App() {
   const [search, setSearch] = useState('')
   const [flag, setFlag] = useState('')  
   const [mode, setMode] = useState('Dark')
-  //const [token, setToken] = useState()
-  const [login, setLogin] = useState(false)
+  
+  const [login, setLogin] = useState(() => {
+    return localStorage.getItem('isLoggedIn') === 'true'
+  })
 
-  const handleLogin = (e) =>{
-    e.preventDefault();
+  useEffect(() => {
+    localStorage.getItem('isLoggedIn', login)
+  }, [login])
+
+  const handleLogin = (session) =>{
     setLogin(true);
+  }
+
+  const handleLogout = () =>{
+    setLogin(false);
+    localStorage.removeItem('isLoggedIn');
   }
   
   let element = useRoutes([
     {
       path: "/",
-      element:<ReadPosts 
-      sortBy={sortBy}
-      search={search} 
-      flags={flag}/>
+      element: login ? 
+      (<ReadPosts sortBy={sortBy} search={search} flags={flag}/>) :
+      (<LoginView onLogin={handleLogin}/>)
     },
     {
       path:"/edit/:id",
-      element: <EditPost />
+      element: login?
+      (<EditPost />):
+      (<LoginView onLogin={handleLogin}/>)
     },
     {
       path:"/new",
-      element: <CreatePost />
+      element: login? 
+      (<CreatePost />) : 
+      (<LoginView onLogin={handleLogin}/>)
     },
     {
       path:"/detail/:id",
       element: <ViewDetail/>
     },
+    {
+      path: "/signup",
+      element: <SignUp/>
+    }
   ]);
 
-  if (!login){
-    return (
-    <div className="login-container">
-      <h2 className="form-title">Log in with</h2>
-      <SocialLogin />
-      <p className="separator"><span>or</span></p>
-      <form action="#" className="login-form" onSubmit={handleLogin}>
-        <InputField type="email" placeholder="Email address" icon="mail" />
-        <InputField type="password" placeholder="Password" icon="lock" />
-        <a href="#" className="forgot-password-link">Forgot password?</a>
-        <button type="submit" className="login-button">Log In</button>
-      </form>
-      <p className="signup-prompt">
-        Dont have an account? 
-        {/* <Link to="/signup" className="signup-link">Sign up</Link> */}
-      </p>
-    </div>
-    )
-  }
+  function LoginView() {
+  return <Login setToken={handleLogin}/>
+}
 
   return (
     <>
       <div className="App" data-theme={mode}>
+        {
+          login ? (
       <div className="header">
         <h1>QuoraLite</h1>
 
@@ -132,7 +133,9 @@ function App() {
 
         <Link to="/"><button className="headerBtn"> Home  </button></Link>
         <Link to="/new"><button className="headerBtn"> Create New Posts </button></Link>
+        <button className="headerBtn" onClick={() => setLogin(false)}>Sign Out</button>
         </div>
+        ) : null}
         {element}
     </div>
     </>

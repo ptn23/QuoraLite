@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router';
 import { supabase } from '../client'
 
 const SignUp = () => {
