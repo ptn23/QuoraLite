@@ -8,7 +8,7 @@ const ReadPosts = ({sortBy, search, flags}) => {
     useEffect(() => {
     const fetchPost = async () => {
         setLoading(true);
-        const { data } = await supabase.from('mini-quora').select().order('created_at', { ascending: false })
+        const { data } = await supabase.from('posts').select().order('created_at', { ascending: false })
             setPosts(data)
             setLoading(false);
         }

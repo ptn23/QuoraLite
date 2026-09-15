@@ -29,14 +29,20 @@ const CreatePost = () => {
             alert("Please enter a post title before submitting!");
             return;
         }
-        await supabase.from('mini-quora').insert({
+        const {error} = await supabase.from('posts').insert({
             title: post.title,
             content: post.content,
             image_url: post.image_url,
             flags: post.flags,
             video_link: post.video_link
-        }).select();
-        window.location = "/";
+        });
+        if (error){
+            console.error("Error creating post:", error.message);
+            alert("Error creating post: " + error.message);
+        }
+        else{
+            window.location = "/";
+        }
     }
 
     return (

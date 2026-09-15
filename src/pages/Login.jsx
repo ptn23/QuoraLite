@@ -4,18 +4,6 @@ import {Link} from 'react-router-dom'
 import './Login.css';
 import PropTypes from 'prop-types';
 
-// async function loginUser(credentials) {
-//   return fetch('http://localhost:8080/login', {
-//    method: 'POST',
-//    headers: {
-//      'Content-Type': 'application/json'
-//    },
-//    body: JSON.stringify(credentials)
-//  })
-//    .then(data => data.json())
-// }
-
-
 export default function Login({setToken}) {
 
   const [email, setEmail] = useState();
@@ -36,7 +24,7 @@ export default function Login({setToken}) {
 
   return(
     <div className="login-wrapper">
-      <h1>Please Log In</h1>
+      <h1>Welcome to QuoraLite! Let's get started.</h1>
       <form onSubmit={handleSubmit}>
         <label>
           <p>Email</p>

@@ -16,7 +16,7 @@ const EditPost = () => {
     useEffect(()=> {
         const getPost = async ()=>{
             setLoading(true);
-            const {data: fetchedPost, error} = await supabase.from('mini-quora').select().eq("id", id).single();
+            const {data: fetchedPost, error} = await supabase.from('posts').select().eq("id", id).single();
             if (error){
                 console.error("Error fetching detail:", error);
             }
@@ -48,7 +48,7 @@ const EditPost = () => {
             alert("Please enter a post title before submitting!");
             return;
         }
-        await supabase.from('mini-quora').update({
+        await supabase.from('posts').update({
             title: post.title,
             content: post.content,
             image_url: post.image_url
@@ -58,7 +58,7 @@ const EditPost = () => {
 
     const deletePost = async(event)=> {
         event.preventDefault();
-        await supabase.from('mini-quora').delete().eq('id', id);
+        await supabase.from('posts').delete().eq('id', id);
         window.location = "/";
     }
 
