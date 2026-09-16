@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import './CreatePost.css'
 import { supabase } from '../client'
-const CreatePost = () => {
+const CreatePost = ({userId}) => {
     const [post, setPost] = useState({
         'title': '',
         'content': '',
@@ -34,7 +34,8 @@ const CreatePost = () => {
             content: post.content,
             image_url: post.image_url,
             flags: post.flags,
-            video_link: post.video_link
+            video_link: post.video_link,
+            user_id: userId ? parseInt(userId, 10) : null
         });
         if (error){
             console.error("Error creating post:", error.message);

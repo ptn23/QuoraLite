@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 
 export default function Login({setToken}) {
 
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   
   const handleSubmit = async e => {
@@ -17,7 +17,7 @@ export default function Login({setToken}) {
       alert('Login failed')
     }
     else{
-      setToken(data.session)
+      setToken(data);
     }
   }
 

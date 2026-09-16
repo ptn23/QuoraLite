@@ -20,24 +20,38 @@ function App() {
     return localStorage.getItem('isLoggedIn') === 'true'
   })
 
-  useEffect(() => {
-    localStorage.getItem('isLoggedIn', login)
-  }, [login])
+  const [userId, setUserId] = useState(() => {
+    return localStorage.getItem('userId') || '';
+  })
 
-  const handleLogin = (session) =>{
+
+  useEffect(() => {
+    localStorage.getItem('isLoggedIn', login);
+    if (userId){
+      localStorage.getItem('userId', userId);
+    }
+  }, [login, userId])
+
+  const handleLogin = (userData) =>{
     setLogin(true);
+    if (userData && userData.id) {
+      setUserId(userData.id);
+      localStorage.setItem('userId', userData.id);
+    }
   }
 
   const handleLogout = () =>{
     setLogin(false);
+    setUserId('');
     localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('userId');
   }
   
   let element = useRoutes([
     {
       path: "/",
       element: login ? 
-      (<ReadPosts sortBy={sortBy} search={search} flags={flag}/>) :
+      (<ReadPosts sortBy={sortBy} search={search} flags={flag} userId={userId}/>) :
       (<LoginView onLogin={handleLogin}/>)
     },
     {
@@ -49,7 +63,7 @@ function App() {
     {
       path:"/new",
       element: login? 
-      (<CreatePost />) : 
+      (<CreatePost userId={userId} />) : 
       (<LoginView onLogin={handleLogin}/>)
     },
     {

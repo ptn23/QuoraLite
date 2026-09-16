@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react'
 import Card from '../components/Card'
 import { supabase } from '../client'
 import Loading from './Loading'
-const ReadPosts = ({sortBy, search, flags}) => {
+const ReadPosts = ({sortBy, search, flags, userId}) => {
     const [posts, setPosts] = useState([])
     const [loading, setLoading] = useState(true);
     useEffect(() => {
     const fetchPost = async () => {
         setLoading(true);
-        const { data } = await supabase.from('posts').select().order('created_at', { ascending: false })
+        const { data } = await supabase.from('posts')
+        .select().eq('user_id', userId).order('created_at', { ascending: false })
             setPosts(data)
             setLoading(false);
         }
