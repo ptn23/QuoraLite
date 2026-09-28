@@ -8,6 +8,7 @@ import ViewDetail from './pages/ViewDetail';
 import './App.css'
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import Community from './pages/Community';
 
 function App() {
 
@@ -73,6 +74,10 @@ function App() {
     {
       path: "/signup",
       element: <SignUp/>
+    },
+    {
+      path:"/community",
+      element:<Community sortBy={sortBy} search={search} flags={flag}/>
     }
   ]);
 
@@ -146,6 +151,7 @@ function App() {
         </div>
 
         <Link to="/"><button className="headerBtn"> Home  </button></Link>
+        <Link to="/community"> <button className="community">Community</button> </Link>
         <Link to="/new"><button className="headerBtn"> Create New Posts </button></Link>
         <button className="headerBtn" onClick={() => setLogin(false)}>Sign Out</button>
         </div>
